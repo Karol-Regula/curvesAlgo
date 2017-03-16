@@ -9,10 +9,9 @@ circle
 circle
 325 325 0 10
 hermite
-150 150 350 150 0 -100 0 150
+150 150 350 150 -100 -100 100 150
 bezier
 200 250 150 50 300 250 300 250
 display
 save
 face.png
-
