@@ -24,4 +24,6 @@ parser.o: parser.c parser.h matrix.h draw.h display.h ml6.h
 run: main
 	./main script
 clean:
-	rm *.o *~
+	rm *.o
+	rm main
+	rm *.png
