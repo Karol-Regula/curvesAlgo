@@ -22,13 +22,13 @@ void add_circle( struct matrix * points,
 		 double cx, double cy, double cz,
 		 double r, double step ) {
 	int i;
-	int x0, y0, x1, y1;
+	double x0, y0, x1, y1;
 	for (i = 0; i < step; i++){
 		x0 = r * cos(2 * M_PI * (i/step)) + cx;
 		y0 = r * sin(2 * M_PI * (i/step)) + cy;
 		x1 = r * cos(2 * M_PI * ((i + 1)/step)) + cx;
 		y1 = r * sin(2 * M_PI * ((i + 1)/step)) + cy;
-		//printf("%d, %d, %d, %d\n", x0, y0, x1, y1);
+		//printf("%f, %f, %f, %f\n", x0, y0, x1, y1);
 		add_edge(points, x0, y0, 0, x1, y1, 0);
 	}
 }
@@ -81,9 +81,9 @@ void add_curve( struct matrix *points,
 	cy = ycoefs->m[2][0];
 	dy = ycoefs->m[3][0];
 
-	int q0, q1;
-	int r0, r1;
-	int t;
+	double q0, q1;
+	double r0, r1;
+	double t;
 
 	for (i = 0; i < step; i++){
 		t = (i/step);
@@ -92,6 +92,7 @@ void add_curve( struct matrix *points,
 		t = ((i + 1)/step);
 		q1 = (ax * t * t * t) + (bx * t * t) + (cx * t) + dx;
 		r1 = (ay * t * t * t) + (by * t * t) + (cy * t) + dy;
+		printf("%f, %f, %f, %f\n", q0, r0, q1, r1);
 	}
 	add_edge(points, q0, r0, 0, q1, r1, 0);
 }
