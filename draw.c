@@ -24,12 +24,11 @@ void add_circle( struct matrix * points,
 	int i;
 	int x0, y0, x1, y1;
 	for (i = 0; i < step; i++){
-		printf("%d\n", i);
 		x0 = r * cos(2 * M_PI * (i/step)) + cx;
 		y0 = r * sin(2 * M_PI * (i/step)) + cy;
 		x1 = r * cos(2 * M_PI * ((i + 1)/step)) + cx;
 		y1 = r * sin(2 * M_PI * ((i + 1)/step)) + cy;
-		printf("%d, %d, %d, %d\n", x0, y0, x1, y1);
+		//printf("%d, %d, %d, %d\n", x0, y0, x1, y1);
 		add_edge(points, x0, y0, 0, x1, y1, 0);
 	}
 }
@@ -58,6 +57,43 @@ void add_curve( struct matrix *points,
 		double x2, double y2,
 		double x3, double y3,
 		double step, int type ) {
+	int ax, bx, cx, dx;
+	int ay, by, cy, dy;
+	int i;
+	struct matrix *xcoefs;
+	struct matrix *ycoefs;
+
+	if (type == 0){//hermite
+		xcoefs = generate_curve_coefs(x0, x1, x2, x3, 0);
+		ycoefs = generate_curve_coefs(y0, y1, y2, y3, 0);
+	}else{//bezier
+		xcoefs = generate_curve_coefs(x0, x1, x2, x3, 1);
+		ycoefs = generate_curve_coefs(y0, y1, y2, y3, 1);
+	}
+
+	ax = xcoefs->m[0][0];
+	bx = xcoefs->m[1][0];
+	cx = xcoefs->m[2][0];
+	dx = xcoefs->m[3][0];
+
+	ay = ycoefs->m[0][0];
+	by = ycoefs->m[1][0];
+	cy = ycoefs->m[2][0];
+	dy = ycoefs->m[3][0];
+
+	int q0, q1;
+	int r0, r1;
+	int t;
+
+	for (i = 0; i < step; i++){
+		t = (i/step);
+		q0 = (ax * t * t * t) + (bx * t * t) + (cx * t) + dx;
+		r0 = (ay * t * t * t) + (by * t * t) + (cy * t) + dy;
+		t = ((i + 1)/step);
+		q1 = (ax * t * t * t) + (bx * t * t) + (cx * t) + dx;
+		r1 = (ay * t * t * t) + (by * t * t) + (cy * t) + dy;
+	}
+	add_edge(points, q0, r0, 0, q1, r1, 0);
 }
 
 
