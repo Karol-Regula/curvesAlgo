@@ -1,0 +1,37 @@
+circle
+100 400 0 10
+circle
+100 390 0 20
+circle
+100 380 0 30
+circle
+100 370 0 40
+circle
+100 360 0 50
+circle
+100 350 0 60
+circle
+400 400 0 10
+circle
+400 390 0 20
+circle
+400 380 0 30
+circle
+400 370 0 40
+circle
+400 360 0 50
+circle
+400 350 0 60
+hermite
+150 150 350 150 100 100 -100 -150
+hermite
+150 150 350 150 -100 -100 100 150
+hermite
+100 150 400 150 100 100 -100 -150
+hermite
+100 150 400 150 -100 -100 100 150
+bezier
+200 250 300 350 300 250 300 250
+display
+save
+face.png
