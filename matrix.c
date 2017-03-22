@@ -71,6 +71,7 @@ struct matrix * generate_curve_coefs( double p1, double p2,
   temp->m[1][0] = p2;
   temp->m[2][0] = p3;
   temp->m[3][0] = p4;
+  temp->lastcol++;
   if (type == 0)//hermite
     matrix_mult(make_hermite(), temp);
   else//bezier

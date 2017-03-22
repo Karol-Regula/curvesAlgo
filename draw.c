@@ -57,8 +57,8 @@ void add_curve( struct matrix *points,
 		double x2, double y2,
 		double x3, double y3,
 		double step, int type ) {
-	int ax, bx, cx, dx;
-	int ay, by, cy, dy;
+	double ax, bx, cx, dx;
+	double ay, by, cy, dy;
 	int i;
 	struct matrix *xcoefs;
 	struct matrix *ycoefs;
@@ -80,21 +80,22 @@ void add_curve( struct matrix *points,
 	by = ycoefs->m[1][0];
 	cy = ycoefs->m[2][0];
 	dy = ycoefs->m[3][0];
+	//printf("x: %f, %f, %f, %f\n", ax, bx, cx, dx);
+	//printf("y: %f, %f, %f, %f\n\n", ay, by, cy, dy);
 
-	double q0, q1;
-	double r0, r1;
+	double xx0, yy0, xx1, yy1;
 	double t;
 
 	for (i = 0; i < step; i++){
 		t = (i/step);
-		q0 = (ax * t * t * t) + (bx * t * t) + (cx * t) + dx;
-		r0 = (ay * t * t * t) + (by * t * t) + (cy * t) + dy;
+		xx0 = (ax * t * t * t) + (bx * t * t) + (cx * t) + dx;
+		yy0 = (ay * t * t * t) + (by * t * t) + (cy * t) + dy;
 		t = ((i + 1)/step);
-		q1 = (ax * t * t * t) + (bx * t * t) + (cx * t) + dx;
-		r1 = (ay * t * t * t) + (by * t * t) + (cy * t) + dy;
-		printf("%f, %f, %f, %f\n", q0, r0, q1, r1);
+		xx1 = (ax * t * t * t) + (bx * t * t) + (cx * t) + dx;
+		yy1 = (ay * t * t * t) + (by * t * t) + (cy * t) + dy;
+		//printf("%f, %f, %f, %f\n", xx0, yy0, xx1, yy1);
+		add_edge(points, xx0, yy0, 0, xx1, yy1, 0);
 	}
-	add_edge(points, q0, r0, 0, q1, r1, 0);
 }
 
 

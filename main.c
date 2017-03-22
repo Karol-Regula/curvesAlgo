@@ -30,7 +30,7 @@ int main(int argc, char **argv) {
   else
     parse_file( "stdin", transform, edges, s );
 
-  
+  //print_matrix(edges);
   free_matrix( edges );
   free_matrix( transform );
-}  
+}
